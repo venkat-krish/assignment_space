@@ -3,7 +3,7 @@
 ## Assignment 1
 
 ### Problem Statement:
-    Attendence monitoring system for an company. The employee details are maintained in the hierarchical structure and the employee entry and exit from the office is counted. 
+Attendence monitoring system for an company. The employee details are maintained in the hierarchical structure and the employee entry and exit from the office is counted. 
 
 **Questions**
 1. How many employees came today?
