@@ -17,3 +17,8 @@
  1. Implement the problem statement in Python using Binary Tree ADT.
  2. Perform an analysis for the questions above and give the running time in terms of input size: n
   
+### How to run?
+ 1. Clone the repository into local workspace (git clone <repository>)
+ 2. Goto the application directory
+ 3. Run $ python attendance_system.py
+ 

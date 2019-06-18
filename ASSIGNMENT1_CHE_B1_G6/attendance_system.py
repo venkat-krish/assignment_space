@@ -1,5 +1,5 @@
 #
-# Employee attendance system captures all the employee's swipe-in and swipe-out detais.
+# Employee attendance system captures all the employee's swipe-in and swipe-out details.
 #
 # @author Venkataramanan K
 #
@@ -99,20 +99,6 @@ class AttendanceSystem():
         """
         return self.employee_tree.get_size()
         # print("Total number of employees today is {0}".format(total_emps))
-
-    def search_id_record(self, emp_ids):
-        """
-            It searches the given list of employee ids in the attendance system tree 
-            and returns the presence and absence of the employee
-            @param emp_ids - list of employee ids
-        """
-
-    def often_employee_records(self, emp_ids):
-        """
-            This function counts the number of unique employee IDs stored in the attendance system.
-            @return string : Total number of employees today : <Total employees>
-        """
-
 
     def print_tree(self):
         for item in self.employee_tree:
