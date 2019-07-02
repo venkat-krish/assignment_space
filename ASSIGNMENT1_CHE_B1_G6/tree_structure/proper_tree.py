@@ -3,8 +3,18 @@ import logging
 logger = logging.getLogger(__name__)
 
 class BinaryTree():
+    """ BinaryTree class has a inner class EmpNode to represent the employee information and 
+        the behaviors to construct and search tree with the given input.
 
+        class EmpNode: 
+            emp_id - Employee Id 
+            left - Type of EmpNode which gets constructed as left sub-tree
+            right - Type of EmpNode, which will hold the right sub-tree
+        insert(n) - Inserts the data element into the tree structure
+        search(n) - Does the search of the node in the tree structure    
+    """
     class EmpNode():
+        """ EmpNode is a node object which stores the data element, left and right node connected with it."""
         def __init__(self, emp_id):
             self.emp_id = emp_id
             self.att_count = 1
@@ -53,9 +63,9 @@ class BinaryTree():
 
     def insert(self, data):
         # logger.debug("Data value "+ str(data))
-        self.root = self.__insert(data, self.root)
+        self.root = self.__insert_node(data, self.root)
     
-    def __insert(self, data, root=None ):
+    def __insert_node(self, data, root=None ):
         if root == None:
             # logger.debug("Creating node {0}".format(data))
             self.size += 1 # Increment the tree height to 1 
@@ -67,7 +77,7 @@ class BinaryTree():
                 node.inc_count()
             else:
                 # logger.debug("Adding left node {0}".format(data))
-                root.set_left(self.__insert(data, root.get_left()))
+                root.set_left(self.__insert_node(data, root.get_left()))
 
         elif data > self.root.get_data():
             node = self.search(data)
@@ -75,7 +85,7 @@ class BinaryTree():
                 node.inc_count()
             else:
                 # logger.debug("Adding right node {0}".format(data))
-                root.set_right(self.__insert(data, root.get_right()))
+                root.set_right(self.__insert_node(data, root.get_right()))
         
         return root
 

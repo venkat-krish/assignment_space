@@ -13,8 +13,9 @@ class AttendanceSystem():
     employee_tree = None
     output_msgs = None
 
-    def __init__(self, input_file=None):
+    def __init__(self, input_file=None, output_file=None):
         self.employee_tree = self.__read_employee_records(input_file)
+        self.output_file = output_file
         self.output_msgs  = list()
 
     def __read_employee_records(self, input_file):
@@ -78,13 +79,17 @@ class AttendanceSystem():
                         self.output_msgs.append("Employee id {0} did not swipe today.".format(query_tuple[i][1]))
                 elif query_tuple[i][0] == 'range':
                     self.output_msgs.append("Employee Attendance:")
+                    logger.debug("Query range {0} to {1}".format(query_tuple[i][1], query_tuple[i][2]))
                     for i in range(int(query_tuple[i][1]), int(query_tuple[i][2])+1):
                         # print("Range value ", i)
                         emp_node = self.employee_tree.search(i)
                         if emp_node != None:
                             presence = 'In' if emp_node.get_att_count() % 2 > 0 else 'Out'    
                             self.output_msgs.append("{0}, {1}, {2}".format(emp_node.get_data(), emp_node.get_att_count(), presence))
-                            
+
+            # Write the output into the output file
+            self.__write_output(self.output_msgs)
+
             logger.debug("Queries {0}".format(query_tuple))
             logger.debug("Out put message {0}".format(self.output_msgs))
             
@@ -102,17 +107,26 @@ class AttendanceSystem():
 
     def print_tree(self):
         for item in self.employee_tree:
-            print("Emp ID :{0}, Attendance:{1} ".format(item.emp_id, item.att_counter))
+            print("Emp ID :{0}, Attendance:{1} ".format(item.get_data(), item.get_att_count()))
+
+    def __write_output(self, message_list):
+        """
+            This method writes the given message list into a output file
+            @param mesage_list list object
+        """
+        lines = map(lambda l: l + '\n', message_list)
+        with open(self.output_file, 'w+') as ofp:
+            ofp.writelines(lines)
+            ofp.close()
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
 
     input_file = 'data/input/inputPS1.txt'
     prompt_file = 'data/input/promptsPS1.txt'
+    output_file = 'data/outputPS1.txt'
 
-    eas = AttendanceSystem(input_file)
-
+    eas = AttendanceSystem(input_file, output_file)
     # eas.print_tree()
-    # eas.head_count_records()
     eas.prompt_records(prompt_file)
