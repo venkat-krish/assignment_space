@@ -55,10 +55,14 @@ class BinaryTree():
             if self.right != None:
                 for elem in self.right:
                     yield elem
+        
+        def __str__(self):
+            return "Emp Node("+ repr(self.emp_id) +")"
     
     # Constructor of BinaryTree
     def __init__(self, root=None):
         self.root = root
+        self.parent = root
         self.size = 0
 
     def insert(self, data):
@@ -71,7 +75,10 @@ class BinaryTree():
             self.size += 1 # Increment the tree height to 1 
             return BinaryTree.EmpNode(data)
         
-        if data < self.root.get_data():
+        if data == root.get_data():
+            return root
+
+        if data < root.get_data():
             node = self.search(data)
             if node != None:
                 node.inc_count()
@@ -79,7 +86,7 @@ class BinaryTree():
                 # logger.debug("Adding left node {0}".format(data))
                 root.set_left(self.__insert_node(data, root.get_left()))
 
-        elif data > self.root.get_data():
+        elif data > root.get_data():
             node = self.search(data)
             if node != None:
                 node.inc_count()
@@ -88,6 +95,28 @@ class BinaryTree():
                 root.set_right(self.__insert_node(data, root.get_right()))
         
         return root
+
+    #  TEST: Coding for alternative flow
+    #  
+    # def add_node(self, data):
+    #     self.root = self.__add_node(data, self.root)
+            
+    
+    # def __add_node(self, data, root):
+    #     if root == None:
+    #         self.size += 1
+    #         return BinaryTree.EmpNode(data)
+        
+    #     if root.get_data() == data:
+    #         return root
+
+    #     if data < root.get_data():
+    #         root.set_left(self.__add_node(data, root.get_left()))
+    #     elif data > root.get_data():
+    #         root.set_right(self.__add_node(data, root.get_right()))
+            
+    #     return root
+
 
     def get_size(self):
         """

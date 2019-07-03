@@ -1,14 +1,16 @@
-Total number of employees today is 3
+Total number of employees today is 5
 Employee ID 23 is present today.
 Employee ID 22 is present today.
 Employee ID 11 is absent today.
 Employee ID 20 is absent today.
-Employee ID 42 is present today.
-Employee id 41 did not swipe today.
+Employee ID 42 is absent today.
+Employee id 41 swiped 2 times today and is currently in office.
 Employee id 12 did not swipe today.
-Employee id 18 did not swipe today.
-Employee id 42 swiped 1 times today and is currently in office.
+Employee id 18 swiped 1 times today and is currently in office.
+Employee id 42 did not swipe today.
 Employee Attendance:
+18, 1, In
 22, 1, In
 23, 1, In
-42, 1, In
+41, 2, Out
+120, 1, In

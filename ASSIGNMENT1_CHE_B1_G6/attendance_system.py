@@ -53,6 +53,7 @@ class AttendanceSystem():
         tree = BinaryTree()
         for emp_id in emp_ids:
             tree.insert(emp_id)
+            # tree.add_node(emp_id) # Insert the element into a tree node.
         return tree
 
     def prompt_records(self, prompt_file):
@@ -107,7 +108,7 @@ class AttendanceSystem():
 
     def print_tree(self):
         for item in self.employee_tree:
-            print("Emp ID :{0}, Attendance:{1} ".format(item.get_data(), item.get_att_count()))
+            print("Emp ID :{0}, Left:{1}, Right:{2},  Attendance:{3} ".format(item.get_data(), item.get_left(), item.get_right(), item.get_att_count()))
 
     def __write_output(self, message_list):
         """
@@ -128,5 +129,5 @@ if __name__ == "__main__":
     output_file = 'data/outputPS1.txt'
 
     eas = AttendanceSystem(input_file, output_file)
-    # eas.print_tree()
+    eas.print_tree()
     eas.prompt_records(prompt_file)
