@@ -39,6 +39,9 @@ class BinaryTree():
         def set_right(self, node):
             self.right = node
 
+        def has_children(self):
+            return (self.left and self.right)
+
         def inc_count(self):
             self.att_count += 1
         
@@ -62,7 +65,6 @@ class BinaryTree():
     # Constructor of BinaryTree
     def __init__(self, root=None):
         self.root = root
-        self.parent = root
         self.size = 0
 
     def insert(self, data):
@@ -93,30 +95,9 @@ class BinaryTree():
             else:
                 # logger.debug("Adding right node {0}".format(data))
                 root.set_right(self.__insert_node(data, root.get_right()))
-        
+                
+        logger.debug("Before return root {0}".format(root.get_data()))
         return root
-
-    #  TEST: Coding for alternative flow
-    #  
-    # def add_node(self, data):
-    #     self.root = self.__add_node(data, self.root)
-            
-    
-    # def __add_node(self, data, root):
-    #     if root == None:
-    #         self.size += 1
-    #         return BinaryTree.EmpNode(data)
-        
-    #     if root.get_data() == data:
-    #         return root
-
-    #     if data < root.get_data():
-    #         root.set_left(self.__add_node(data, root.get_left()))
-    #     elif data > root.get_data():
-    #         root.set_right(self.__add_node(data, root.get_right()))
-            
-    #     return root
-
 
     def get_size(self):
         """

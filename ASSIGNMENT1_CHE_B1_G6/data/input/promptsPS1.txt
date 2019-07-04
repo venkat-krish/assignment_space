@@ -1,10 +1,5 @@
-searchID:23
 searchID:22
-searchID:11
-searchID:20
-searchID:42
+searchID:120
 howOften:41
 howOften:12
-howOften:18
-howOften:42
-range:18:125
+range:23:125

@@ -51,9 +51,10 @@ class AttendanceSystem():
            @return Tree constructed tree structure. 
         """
         tree = BinaryTree()
+
         for emp_id in emp_ids:
             tree.insert(emp_id)
-            # tree.add_node(emp_id) # Insert the element into a tree node.
+        
         return tree
 
     def prompt_records(self, prompt_file):
@@ -79,9 +80,12 @@ class AttendanceSystem():
                     else:
                         self.output_msgs.append("Employee id {0} did not swipe today.".format(query_tuple[i][1]))
                 elif query_tuple[i][0] == 'range':
+                    # Taking the lower bound and upper bound values from Range
+                    lower, upper = int(query_tuple[i][1]), int(query_tuple[i][2])
+                    self.output_msgs.append("Range: {0} to {1}".format(lower, upper))
                     self.output_msgs.append("Employee Attendance:")
                     logger.debug("Query range {0} to {1}".format(query_tuple[i][1], query_tuple[i][2]))
-                    for i in range(int(query_tuple[i][1]), int(query_tuple[i][2])+1):
+                    for i in range(lower, upper+1):
                         # print("Range value ", i)
                         emp_node = self.employee_tree.search(i)
                         if emp_node != None:
@@ -129,5 +133,5 @@ if __name__ == "__main__":
     output_file = 'data/outputPS1.txt'
 
     eas = AttendanceSystem(input_file, output_file)
-    eas.print_tree()
+    # eas.print_tree()
     eas.prompt_records(prompt_file)
