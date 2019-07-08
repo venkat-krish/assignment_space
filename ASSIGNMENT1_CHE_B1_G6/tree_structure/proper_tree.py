@@ -2,25 +2,30 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class BinaryTree():
-    """ BinaryTree class has a inner class EmpNode to represent the employee information and 
-        the behaviors to construct and search tree with the given input.
+""" 
+    BinaryTree class has a inner class EmpNode to represent the employee information and 
+    the behaviors to construct and search tree with the given input.
 
-        class EmpNode: 
-            emp_id - Employee Id 
-            left - Type of EmpNode which gets constructed as left sub-tree
-            right - Type of EmpNode, which will hold the right sub-tree
-        insert(n) - Inserts the data element into the tree structure
-        search(n) - Does the search of the node in the tree structure    
-    """
+    class EmpNode: 
+        emp_id - Employee Id 
+        left - Type of EmpNode which gets constructed as left sub-tree
+        right - Type of EmpNode, which will hold the right sub-tree
+    
+    insert(n) - Inserts the data element into the tree structure
+    search(n) - Does the search of the node in the tree structure    
+"""
+class BinaryTree():
+    
+    """ EmpNode is a node object which stores the data element, left and right node connected with it."""
     class EmpNode():
-        """ EmpNode is a node object which stores the data element, left and right node connected with it."""
+       
         def __init__(self, emp_id):
-            self.emp_id = emp_id
-            self.att_count = 1
+            self.emp_id = emp_id # Employee id attribute
+            self.att_count = 1 # Attendance is equal to swipe count
             self.left = None
             self.right = None
-        
+
+        """ ** Getters and setters of the class attributes ** """
         def get_data(self):
             return self.emp_id
 
@@ -48,6 +53,7 @@ class BinaryTree():
         def dec_count(self):
             self.att_count -= 1
 
+        """ Default method to produce the iterator of the object """
         def __iter__(self):
             if self.left != None:
                 for elem in self.left:
@@ -58,7 +64,8 @@ class BinaryTree():
             if self.right != None:
                 for elem in self.right:
                     yield elem
-        
+                
+        """ Object string representation """
         def __str__(self):
             return "Emp Node("+ repr(self.emp_id) +")"
     
@@ -66,18 +73,27 @@ class BinaryTree():
     def __init__(self, root=None):
         self.root = root
         self.size = 0
-
+    """ 
+        insert() - Inserts the given data into a tree structure
+        @param data - Employee id data 
+    """
     def insert(self, data):
-        # logger.debug("Data value "+ str(data))
+        logger.debug("Data value "+ str(data))
         self.root = self.__insert_node(data, self.root)
-    
+
+
+    """ 
+        __insert_node() - It's a private method, takes emp id and root node as parameters
+        @param data : Emp id
+        @param root : EmpNode - Current root of the tree
+    """
     def __insert_node(self, data, root=None ):
         if root == None:
-            # logger.debug("Creating node {0}".format(data))
+            logger.debug("Creating node {0}".format(data))
             self.size += 1 # Increment the tree height to 1 
             return BinaryTree.EmpNode(data)
         
-        if data == root.get_data():
+        if data == root.get_data(): # If the given data is equal to the root data then return the root node
             return root
 
         if data < root.get_data():
@@ -85,7 +101,7 @@ class BinaryTree():
             if node != None:
                 node.inc_count()
             else:
-                # logger.debug("Adding left node {0}".format(data))
+                logger.debug("Adding left node {0}".format(data))
                 root.set_left(self.__insert_node(data, root.get_left()))
 
         elif data > root.get_data():
@@ -93,19 +109,16 @@ class BinaryTree():
             if node != None:
                 node.inc_count()
             else:
-                # logger.debug("Adding right node {0}".format(data))
+                logger.debug("Adding right node {0}".format(data))
                 root.set_right(self.__insert_node(data, root.get_right()))
                 
-        logger.debug("Before return root {0}".format(root.get_data()))
         return root
 
-    def get_size(self):
-        """
-            Size gives the total number of nodes in the tree
-            @return int size
-        """
-        return self.size
-
+    """ 
+        __insert_node() - It's a private method, takes emp id and root node as parameters
+        @param data : Emp id
+        @param root : EmpNode - Current root of the tree
+    """
     def search(self, data):
         current = self.root
         while(current != None):
@@ -116,6 +129,13 @@ class BinaryTree():
             else:
                 return current
         return current
+
+    def get_size(self):
+        """
+            Size gives the total number of nodes in the tree
+            @return int size
+        """
+        return self.size
 
     def __str_(self):
         return "Binary Tree("+ repr(self.root) +")" 
