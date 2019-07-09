@@ -218,7 +218,7 @@ class EmployeeAttendance():
 
 if __name__ == '__main__':
     # Setting the logging level as INFO
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.DEBUG)
     # Declarations of input, prompt and output files
     input_file = 'data/input/inputPS1.txt'
     prompt_file = 'data/input/promptsPS1.txt'
@@ -226,6 +226,5 @@ if __name__ == '__main__':
 
     # Instantiation of EmployeeAttendance class object
     eas = EmployeeAttendance(input_file, output_file)
-    
     # Invocation of attendance operations with query input file.
     eas.attendance_operations(prompt_file)

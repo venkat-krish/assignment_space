@@ -1,6 +1,5 @@
 import logging
 
-logger = logging.getLogger(__name__)
 
 """ 
     BinaryTree class has a inner class EmpNode to represent the employee information and 
@@ -78,7 +77,6 @@ class BinaryTree():
         @param data - Employee id data 
     """
     def insert(self, data):
-        logger.debug("Data value "+ str(data))
         self.root = self.__insert_node(data, self.root)
 
 
@@ -89,7 +87,6 @@ class BinaryTree():
     """
     def __insert_node(self, data, root=None ):
         if root == None:
-            logger.debug("Creating node {0}".format(data))
             self.size += 1 # Increment the tree height to 1 
             return BinaryTree.EmpNode(data)
         
@@ -101,7 +98,6 @@ class BinaryTree():
             if node != None:
                 node.inc_count()
             else:
-                logger.debug("Adding left node {0}".format(data))
                 root.set_left(self.__insert_node(data, root.get_left()))
 
         elif data > root.get_data():
@@ -109,7 +105,6 @@ class BinaryTree():
             if node != None:
                 node.inc_count()
             else:
-                logger.debug("Adding right node {0}".format(data))
                 root.set_right(self.__insert_node(data, root.get_right()))
                 
         return root
