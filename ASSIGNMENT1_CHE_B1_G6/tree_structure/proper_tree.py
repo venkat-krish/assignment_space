@@ -85,28 +85,22 @@ class BinaryTree():
         @param data : Emp id
         @param root : EmpNode - Current root of the tree
     """
-    def __insert_node(self, data, root=None ):
+
+    def __insert_node(self, data, root=None):
         if root == None:
-            self.size += 1 # Increment the tree height to 1 
+            self.size += 1  # Increment the tree size by 1
             return BinaryTree.EmpNode(data)
-        
-        if data == root.get_data(): # If the given data is equal to the root data then return the root node
+
+        if data == root.get_data():  # If data is equal to the node data then increment count and return the root node
+            root.inc_count()
             return root
 
-        if data < root.get_data():
-            node = self.search(data)
-            if node != None:
-                node.inc_count()
-            else:
-                root.set_left(self.__insert_node(data, root.get_left()))
+        elif data < root.get_data():
+            root.set_left(self.__insert_node(data, root.get_left()))
 
-        elif data > root.get_data():
-            node = self.search(data)
-            if node != None:
-                node.inc_count()
-            else:
-                root.set_right(self.__insert_node(data, root.get_right()))
-                
+        else:
+            root.set_right(self.__insert_node(data, root.get_right()))
+
         return root
 
     """ 
