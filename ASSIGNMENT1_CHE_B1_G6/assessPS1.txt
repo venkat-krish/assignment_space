@@ -1,0 +1,23 @@
+#=====================================================================#
+#      RUNNING TIME ASSESSMENT OF EMPLOYEE ATTENDANCE SYSTEM          #
+#                                                                     #
+#      Batch:- AS1_CH1_B1_G6 , Date:- 13-July-2019                    #
+#=====================================================================#
+
+Overview:
+The running time assessment of a program gives an overall impression about the programs complexity 
+with respect to the time and space utlization. A program may contains different functional operations and their relevant
+algorithms to implement the desired functionalities. Assessing a program with respect to temporal and spatial complexity will
+give an indicative impression about the complex nature of the operations that the program carries out. 
+
+Here, the program for employee attendance system's important operations and algorithms hav been undergone a complexity analysis with standard methods(Random Access Model and Primitive counting).
+The complexity of the running time and space utilization have been represented in Asymptotic notations such as Big-oh, Big-Theta and Big-Omega. 
+
+Assessment:
+
+ <TO BE FILLED FOR 6 questions and methods >
+
+
+Conclusion:
+ <Summary TO BE FILLED For the overall assessment >
+

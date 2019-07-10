@@ -1,10 +1,10 @@
 
 import logging
-from tree_structure.proper_tree import BinaryTree
+import os
+from tree_datastructure import BinaryTree
 
 # Logger is an instance of logging 
 logger = logging.getLogger(__name__)
-
 
 """
     Employee Attendance class contains the following member variable and instance methods 
@@ -113,6 +113,8 @@ class EmployeeAttendance():
         # Write into a output file
         self.__output_result(out_msg)
 
+
+
     """
         _frequentVisitorRec() : Finds the employee id that how often he has swiped the system.
         @param: eID employee id
@@ -129,6 +131,8 @@ class EmployeeAttendance():
             self.__output_result(out_msg)
         except ValueError as ve:
             logger.error("Error in method freqentVisitorRec; {0}".format(ve))
+
+
     """
         _printRangePresent() : Finds the employee id that how often he has swiped the system.
         @param: startId employee id
@@ -157,7 +161,7 @@ class EmployeeAttendance():
     """
     def __output_result(self, result_msg):
         try:
-            with open(self.output_file, 'a') as ofp:
+            with open(self.output_file, 'a+') as ofp:
                 ofp.write(result_msg+"\n") # Write the given result message into an output file.
 
         except IOError as ie:
@@ -212,9 +216,11 @@ class EmployeeAttendance():
         clear_output(): Erase the content of the text file
     """
     def __clear_output(self):
-        with open(self.output_file, 'r+') as ofp:
-            ofp.truncate(0)
-            ofp.close()
+        if os.path.exists(self.output_file) & os.path.isfile(self.output_file):
+            with open(self.output_file, 'r+') as ofp:
+                ofp.truncate(0)
+                ofp.close()
+
 
 if __name__ == '__main__':
     # Setting the logging level as INFO

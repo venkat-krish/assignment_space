@@ -1,6 +1,3 @@
-import logging
-
-
 """ 
     BinaryTree class has a inner class EmpNode to represent the employee information and 
     the behaviors to construct and search tree with the given input.
@@ -79,7 +76,6 @@ class BinaryTree():
     def insert(self, data):
         self.root = self.__insert_node(data, self.root)
 
-
     """ 
         __insert_node() - It's a private method, takes emp id and root node as parameters
         @param data : Emp id
@@ -92,10 +88,10 @@ class BinaryTree():
             return BinaryTree.EmpNode(data)
 
         if data == root.get_data():  # If data is equal to the node data then increment count and return the root node
-            root.inc_count()
+            root.inc_count() # Increment the attedance count
             return root
 
-        elif data < root.get_data():
+        elif data < root.get_data(): # if the given data is lesser then insert a node at left side
             root.set_left(self.__insert_node(data, root.get_left()))
 
         else:
