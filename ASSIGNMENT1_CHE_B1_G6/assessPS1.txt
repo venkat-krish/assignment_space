@@ -6,7 +6,7 @@
 
 Overview:
 The running time assessment of a program gives an overall impression about the programs complexity 
-with respect to the time and space utlization. A program may contains different functional operations and their relevant
+with respect to the time and space utilization. A program may contains different functional operations and their relevant
 algorithms to implement the desired functionalities. Assessing a program with respect to temporal and spatial complexity will
 give an indicative impression about the complex nature of the operations that the program carries out. 
 
@@ -15,7 +15,48 @@ The complexity of the running time and space utilization have been represented i
 
 Assessment:
 
- <TO BE FILLED FOR 6 questions and methods >
+1. How many employees came today?
+
+  Method		: _getHeadCountRec
+  Running Time	: O(1)
+  Explanation 	: in BST implementation we have used a reference variable 'size'
+				  Which will be incremented for each insert of new node and
+				  it will represent the overall size of the BST tree
+				  Hence we can get headcount info on constant time O(1)
+
+2. Did a particular employee come today?
+
+  Method		: _searchIDRec
+  Running Time	: O(n)  - n is size of the tree,
+                  more precisely its O(h) , h - height of the tree
+
+  Explanation 	: in BST search implementation number of iteration depends on the height of the tree h,
+                  in case of a skewed tree height = size - 1, hence running time is O(n), precisely O(h)
+				  n = size of tree and h= height of tree
+
+
+3. How often did an employee enter into the office?
+
+  Method		: _howOftenRec
+  Running Time	: O(n)  - n is size of the tree,
+                  more precisely its O(h) , h - height of the tree
+
+  Explanation 	: Since each node has a visit counter in place,
+				  running time depends on the search functionality, hence its O(n)
+
+
+4. Which employee moves out of office the greatest number of times?
+
+  Method		: _frequentVisitorRec
+  Running Time	: O(n)  - n is size of the tree, (independent of tree height)
+
+
+  Explanation 	: Max node is computed by visiting all the nodes once,
+                  by computing max for each child subtree and rolling up to root level for over all max
+
+
+5. Which employee ids within a range of IDs attended office, the attendance counter for them, and
+whether they are inside or outside office?
 
 
 Conclusion:

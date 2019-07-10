@@ -72,6 +72,8 @@ class EmployeeAttendance():
     """ 
         _getHeadCountRec() : Counts the number of unique records stored in the tree and 
                             prints the employee headcount for the day. 
+        Running time: - inner method get_size running time is O(1)
+                        Hence running time of this method is O(1)
     """
     def _getHeadCountRec(self):
         # Get the unique employee records count from the Binary Tree
@@ -84,6 +86,8 @@ class EmployeeAttendance():
     """
         _searchIDRec() : Searches the given employee id in the stored binary tree and returns the node
         @param: eID employee id
+        Running time: - Depends on tree height O(h)
+                      - Worst case if the tree is skewed then its O(n)
     """
     def _searchIDRec(self, eId):
         # Search the given employee id in the binary tree
@@ -100,6 +104,8 @@ class EmployeeAttendance():
     """
         _howOftenRec() : Finds the employee id that how often he has swiped the system.
         @param: eID employee id
+        Running time: - Depends on tree height O(h)
+                      - Worst case if the tree is skewed then its O(n)
     """
     def _howOftenRec(self, eId):
          # Search the given employee id in the binary tree
@@ -117,21 +123,13 @@ class EmployeeAttendance():
 
     """
         _frequentVisitorRec() : Finds the employee id that how often he has swiped the system.
-        @param: eID employee id
+        Running time: - All nodes in the tree are visited once hence O(n)
     """
     def _frequentVisitorRec(self):
-        try:
-            employees = [node for node in self.employee_tree]
-
-            employees.sort(key=lambda x: x.get_att_count(), reverse=True)
-            
-            out_msg = self.RESULT_MSGS['FrequentCount'].format(employees[0].get_data(), employees[0].get_att_count())
-
-            # Write into a output file
-            self.__output_result(out_msg)
-        except ValueError as ve:
-            logger.error("Error in method freqentVisitorRec; {0}".format(ve))
-
+        employee = self.employee_tree.max_visitor()
+        out_msg = self.RESULT_MSGS['FrequentCount'].format(employee.get_data(), employee.get_att_count())
+        # Write into a output file
+        self.__output_result(out_msg)
 
     """
         _printRangePresent() : Finds the employee id that how often he has swiped the system.
