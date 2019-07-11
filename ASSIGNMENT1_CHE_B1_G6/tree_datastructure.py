@@ -40,8 +40,17 @@ class BinaryTree():
         def set_right(self, node):
             self.right = node
 
-        def has_children(self):
-            return (self.left and self.right)
+        def is_leaf(self):
+            return self.get_left() is None and self.get_right() is None
+
+        def has_left_child(self):
+            return self.get_left() is not None
+
+        def has_right_child(self):
+            return self.get_right() is not None
+
+        def get_presence(self):
+            return 'In' if self.get_att_count() % 2 > 0 else 'Out'
 
         def inc_count(self):
             self.att_count += 1
@@ -134,8 +143,8 @@ class BinaryTree():
     Max of each subtree (child) will be computed, and then over all max will be found   
     Running time: Each node will be visited once, hence running time is O(n)
     """
-    def __max_visitor_node(self, root:EmpNode):
-        if root.get_left() is None and root.get_right() is None:   # leaf node - hence max node is same as current node
+    def __max_visitor_node(self, root):
+        if root.is_leaf() :   # leaf node - hence max node is same as current node
             return root
         if root.get_left() is None:                                # Non Leaf - with one child - right
             return self.max_compare(root,self.__max_visitor_node(root.get_right()))
@@ -149,11 +158,44 @@ class BinaryTree():
     Compare two nodes based on visit count
     Running Time: O(1)
     """
-    def max_compare(self, node1:EmpNode, node2:EmpNode):
+    def max_compare(self, node1, node2):
         if node1.get_att_count() >= node2.get_att_count():
             return node1
         else:
             return node2
+
+    """
+    Inorder traversal on BST with range applied on traversal 
+    Running time : - O(n) on worst case
+                   - if values in range is less than n, then worst case will not cross O(r) - r is int values in range
+                   - O( min(n,r) ) - r = values in range n = size of tree
+    """
+    def inorder_wt_range(self, min_range, max_range):
+        return self.__inorder_wt_range_rec(self.root, min_range, max_range)
+
+    """
+    Inorder traversal on BST with range applied on traversal - internal method with recursion
+    Running time : - O(n) on worst case
+                   - if values in range is less than n, then worst case will not cross O(r) - r is int values in range
+                   - O(min(n,r)) - r = values in range n = size of tree
+    """
+    def __inorder_wt_range_rec(self, root, min_range, max_range):
+        str = ""
+        # visit left sub tree only when root value is > min
+        # otherwise left subtree will not hold any emp id in given range
+        if root.has_left_child() and root.get_data() > min_range:
+            str += self.__inorder_wt_range_rec(root.get_left(), min_range, max_range)
+
+        # Check if root value is with in range and print the details
+        if min_range <= root.get_data() <= max_range:
+            str += "{0}, {1}, {2}\n".format(root.get_data(), root.get_att_count(), root.get_presence())
+
+        # visit right sub tree only when root vale is < max
+        # otherwise right subtree will not hold and emp id in range
+        if root.has_right_child() and root.get_data() < max_range:
+            str += self.__inorder_wt_range_rec(root.get_right(), min_range, max_range)
+        return str
+
 
 
     def get_size(self):

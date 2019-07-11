@@ -58,6 +58,7 @@ class EmployeeAttendance():
     """ 
         _readEmployeeRec() : Reads the data from the given input file and constructs the tree
         @return BinaryTree object
+        Running time : - O(n^2) - since its repeated insert operation 
     """
     def _readEmployeeRec(self, emp_tree, emp_list, idx):
         if idx == len(emp_list):
@@ -135,23 +136,15 @@ class EmployeeAttendance():
         _printRangePresent() : Finds the employee id that how often he has swiped the system.
         @param: startId employee id
         @param: endId employee id
-    """   
+        Running time : - O(n) on worst case
+                   - if values in range is less than n, then worst case will not cross O(r) - r is int values in range
+                   - O( min(n,r) ) - r = values in range n = size of tree
+    """
+
     def _printRangePresent(self, startId, endId):
-        try:
-            out_msg = self.RESULT_MSGS['Range'].format(startId, endId)
-
-            for eId in range(startId, endId):
-                emp_node = self.employee_tree.search(eId)
-
-                if emp_node != None:
-                    presence = 'In' if emp_node.get_att_count() % 2 > 0 else 'Out'    
-
-                    out_msg += "{0}, {1}, {2}\n".format(emp_node.get_data(), emp_node.get_att_count(), presence)
-
-            # Write into a output file
-            self.__output_result(out_msg)
-        except ValueError as ve:
-            logger.error("Error in method freqentVisitorRec; {0}".format(ve))
+        str = self.employee_tree.inorder_wt_range(startId,endId)
+        # Write into a output file
+        self.__output_result(str)
 
     """
         output_result() : It writes the output result into the output file.
@@ -167,6 +160,9 @@ class EmployeeAttendance():
 
     """
         attendance_operations() : It's a controller function that invokes the required methods in a sequential order.
+        Running Time: O(n1 * n2)
+                     n1 = number of operations to be performed
+                     n2 = size of Tree formed
     """
     def attendance_operations(self, prompt_file):
         try:
