@@ -137,8 +137,8 @@ class EmployeeAttendance():
         @param: startId employee id
         @param: endId employee id
         Running time : - O(n) on worst case
-                   - if values in range is less than n, then worst case will not cross O(r) - r is int values in range
-                   - O( min(n,r) ) - r = values in range n = size of tree
+                   -  Amortized analysis would have a better running representation 
+                      as we are limiting the number of iteration based on range 
     """
 
     def _printRangePresent(self, startId, endId):

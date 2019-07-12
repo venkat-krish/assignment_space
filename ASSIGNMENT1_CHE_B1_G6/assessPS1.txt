@@ -60,10 +60,8 @@ whether they are inside or outside office?
 
   Method		: _printRangePresent
   Running Time	: O(n)  - n is size of the tree  - in terms of tree size
-                  if number of int values in given range is less than n then its O(r)
-                  O(min(n,r))
-                     n - size of tree
-                     r - number of int values with in given range
+                  Amortized analysis would have a better running representation
+                  as we are limiting the number of iteration based on range
 
 
   Explanation 	: In order traversal with Range bound was used in implementation
